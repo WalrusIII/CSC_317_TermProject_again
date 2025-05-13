@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Login Page </title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Login</h1>
+    <div class = "cartIcon">
+        <a href="/cart">
+        <img src="/images/shopping-cart.png">
+        </a>
+    </div>
+    <img src="/<%= product.image %>" alt="<%= product.name %>" style="max-width: 500px; max-height: 300px;">
+    <p><strong>Description:</strong> <%= product.description %></p>
+    <p><strong>Price:</strong> <%= product.price %></p>
+    <div class="block">
+        <input type="hidden" id="productKey" value="<%= productKey %>">
+        <button id="addToCart">Add To Cart</button>
+    </div>
+    <a href="/">Back to Home</a>
+    <script src="/cart.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage Template</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>The Silver Surfer Snowboard Shop</h1>
+    <div class = "cartIcon">
+        <a href="/cart">
+        <img src="images/shopping-cart.png">
+        </a>
+    </div>
+    <div class="container">
+        <% Object.keys(products).forEach(key => { %>
+            <div class="grid-item">
+                <a href="/product/<%= key %>">
+                    <img src="/<%= products[key].image %>" alt="<%= products[key].name %>">
+                    <h2><%= products[key].name %></h2>
+                    <p>$<%= products[key].price %></p>
+                </a>
+            </div>
+        <% }); %>
+    </div>
+
+
+
+
+
+
+    <!--
+    <ul>
+        <% Object.keys(products).forEach(key => { %>
+            <li><a href="/product/<%= key %>"><%= products[key].name %></a></li>
+        <% }); %>
+    </ul>
+    -->
+</body>
+</html>

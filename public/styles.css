@@ -1,0 +1,122 @@
+/* NAV BAR CSS */
+#navbar {
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    background-color: lightblue;
+}
+/* Navbar links */
+#navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+/*
+.block {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--box-shadow);
+  }
+  */
+  button {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
+
+
+/* INDEX PAGE CSS */
+.container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: auto;
+    row-gap: 30px;
+    margin: 30px;
+}
+
+.grid-item{
+    /* max-width: 300px; 
+    grid-row: span 1; */
+    /* background-color: white;
+    border-radius: 8px; */
+    grid-column: span 1;
+}
+
+.grid-item-wide{
+    /*max-width: 600px;*/
+    grid-column: span 2;
+}
+.container img {
+    width: 100%;           /* Fill the grid cell width */
+    height: 200px;         /* Fixed height for uniformity */
+    object-fit: cover;    /* Crop the image to fill the box */
+    border-radius: 8px;    /* Optional: for a clean look */
+}
+
+.cartIcon{
+    justify-content: left;
+}
+.cartIcon img {
+    width: 120px;
+    height: 60px;
+    background-color: whitesmoke;
+    border-radius: 40px;
+}
+/*
+#productImage{
+    max-width: 300px;
+}
+#productImageWide{
+    max-width: 600px;
+}
+*/
+
+
+
+/* LOGIN FORM CSS */
+body {
+    background-color: lightgray;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container{
+    background-color: #f8f8f8;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 300px;
+    padding: 15px;
+}
+
+input, label{
+    margin-bottom: 5px;
+}
+
+.button{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    color: white;
+    background-color: rgb(0, 162, 255);
+    border-radius: 5px;
+    border-color: rgb(0, 162, 255);
+}
+
+.button:hover{
+    color: black;
+    transform: scale(1.07);
+    background-color: aqua;
+}
