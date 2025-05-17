@@ -102,8 +102,34 @@ app.get('/product/:key', (req, res) => {
 
 // Routes
 
+// home page
 app.get('/', (req, res) => {
   res.render('index', { products });
+});
+
+// login page
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+// About Us page
+app.get('/aboutus', (req, res) => {
+  res.render('aboutUs');
+});
+
+// FAQ page
+app.get('/faq', (req, res) => {
+  res.render('faq');
+});
+
+// cart page route
+app.get('/cart', (req, res) => {
+  db.all('SELECT productKey, quantity, price FROM cart', (err, rows) => {
+    if (err) return res.status(500).send('DB error');
+
+    // You can also enrich cart items with full product info if needed
+    res.render('shoppingCart', { cartItems: rows });
+  });
 });
 
 //const userRoutes = require('./routes/users');
@@ -181,15 +207,7 @@ app.post('/remove-from-cart/:key', (req, res) => {
 });
 
 
-// get info from cart database
-app.get('/cart', (req, res) => {
-  db.all('SELECT productKey, quantity, price FROM cart', (err, rows) => {
-    if (err) return res.status(500).send('DB error');
 
-    // You can also enrich cart items with full product info if needed
-    res.render('shoppingCart', { cartItems: rows });
-  });
-});
 
 
 

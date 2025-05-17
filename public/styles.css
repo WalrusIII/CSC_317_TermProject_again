@@ -31,6 +31,9 @@
     border-radius: 4px;
   }
 
+.title{
+    margin-left: 30px;
+}
 
 /* INDEX PAGE CSS */
 .container{
@@ -87,6 +90,16 @@ body {
     font-family: sans-serif;
     margin: 0;
 }
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px; 
+    /*text-align: center;*/
+}
+
 
 form{
     display: flex;
