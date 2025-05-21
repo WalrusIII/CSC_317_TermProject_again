@@ -86,6 +86,7 @@
 
 /* LOGIN FORM CSS */
 body {
+    /*background-image: url("images/background.jpg");*/
     background-color: lightgray;
     font-family: sans-serif;
     margin: 0;
