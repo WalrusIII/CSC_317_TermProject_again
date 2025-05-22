@@ -1,84 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E Commerce</title>
-    <link rel="stylesheet" href="styles.css"/>
-    <!--
-        Site -> Storefront
-        Products/Services (minimum 12 items) [*]
-        Payment 
-        Login / Registration [*]
-        About / Company Info [*]
-        FAQ
-        User Profile [*]
-        Search [*]
-        Navigation [*]
-    -->
+    <title>SnowGear E-Commerce</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+
+    <!-- Cart and User Icons -->
+    <div class="cartIcon">
+        <img src="images/shopping-cart.png" alt="Cart">
+        <span class="cartCount" id="cartCount">0</span>
+    </div>
+
+    <div class="userIcon">
+        <img src="images/user-icon.png" alt="User">
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <button id="toggleDarkMode" class="button">🌙 Toggle Dark Mode</button>
+
+    <!-- Search Bar -->
     <form>
-        Search Bar
+        <input type="text" placeholder="Search products..." />
+        <button class="button">Search</button>
     </form>
+
+    <!-- Navigation Bar -->
     <div id="navbar">
-        <a href="#whatisit">Login / Registration</a>
-        <a href="#whoisimpacted">About Us</a>
-        <a href="#whatcanido">FAQ</a>
+        <a href="#login">Login / Registration</a>
+        <a href="#about">About Us</a>
+        <a href="#faq">FAQ</a>
     </div>
-    <div class=container>
-        <div class=grid-item-wide>
-            <img id = "productImageWide" src = "images/snowboard1.jpg" alt = "snowboard1">
-            div1
+
+    <!-- Product Grid -->
+    <div class="container">
+        <div class="grid-item-wide">
+            <img src="images/snowboard1.jpg" alt="snowboard1">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <img id = "productImage" src = "images/goggles1.jpg" alt = "goggles1">
-            div2
+        <div class="grid-item">
+            <img src="images/goggles1.jpg" alt="goggles1">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <img id = "productImage" src = "images/helmet1.jpg" alt = "helmet1">
-            div3
+        <div class="grid-item">
+            <img src="images/helmet1.jpg" alt="helmet1">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <img id = "productImage" src = "images/jacket1.jpg" alt = "jacket1">
-            div4
+        <div class="grid-item">
+            <img src="images/jacket1.jpg" alt="jacket1">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <img id = "productImage" src = "images/jacket2.jpg" alt = "jacket2">
-            div5
+        <div class="grid-item">
+            <img src="images/jacket2.jpg" alt="jacket2">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <a href="gloves1.html"><img id = "productImage" src = "images/gloves1.jpg" alt = "gloves">
-            </a>
-                div6
+        <div class="grid-item">
+            <img src="images/gloves1.jpg" alt="gloves1">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item-wide>
-            <img id = "productImageWide" src = "images/snowboard2.jpg" alt = "snowboard2">
-            div7
+        <div class="grid-item-wide">
+            <img src="images/snowboard2.jpg" alt="snowboard2">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <img src = "images/gloves2.jpg" alt = "gloves">
-            div8
+        <div class="grid-item">
+            <img src="images/gloves2.jpg" alt="gloves2">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <a href="boots1.html"><img src = "images/boots1.jpg" alt = "boots">
-            </a>
-            div9
+        <div class="grid-item">
+            <img src="images/boots1.jpg" alt="boots1">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <img src = "images/goggles2.jpg" alt = "goggles">
-            div10
+        <div class="grid-item">
+            <img src="images/goggles2.jpg" alt="goggles2">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <a href="boots2.html"><img src = "images/boots2.jpg" alt = "boots">
-            </a>
-            div11
+        <div class="grid-item">
+            <img src="images/boots2.jpg" alt="boots2">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
-        <div class=grid-item>
-            <img src = "images/helmet2.jpg" alt = "helmet">
-            div12
+        <div class="grid-item">
+            <img src="images/helmet2.jpg" alt="helmet2">
+            <button onclick="addToCart()" class="button">Add to Cart</button>
         </div>
     </div>
-    
+
+    <!-- JavaScript -->
+    <script>
+        // Dark Mode Toggle
+        document.getElementById('toggleDarkMode').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Cart Counter
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById("cartCount").innerText = count;
+        }
+    </script>
 </body>
+
 </html>
