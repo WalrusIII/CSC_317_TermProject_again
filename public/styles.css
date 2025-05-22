@@ -161,3 +161,19 @@ input, label{
     transform: scale(1.07);
     background-color: aqua;
 }
+
+.place-order-button {
+    background-color: #007BFF; /* Bootstrap-style blue */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.place-order-button:hover {
+    background-color: #0056b3;
+}

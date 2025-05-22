@@ -295,6 +295,21 @@ app.post('/login', (req, res) => {
   });
 });
 
+// place order
+app.post('/place-order', (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).send('Unauthorized');
+  }
+
+  db.run('DELETE FROM cart', (err) => {
+    if (err) {
+      console.error('Error clearing cart:', err);
+      return res.status(500).send('Failed to place order.');
+    }
+    res.redirect('/cart');
+  });
+});
+
 
 
 // logout
