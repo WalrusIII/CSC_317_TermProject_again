@@ -12,13 +12,20 @@
         <a href="/login">Login/Registration</a>
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Feeling Lucky?</a>
     </div>
-    
+
     <h1 class="title"><%= product.name %></h1>
     <div class = "cartIcon">
         <a href="/cart">
         <img src="/images/shopping-cart.png">
         </a>
     </div>
+
+    <div class="userIcon">
+        <a href="/login">
+            <img src="images/user-icon.png" alt="User">
+        </a>
+    </div>
+    
     <div class="title">
         <img src="/<%= product.image %>" alt="<%= product.name %>" style="max-width: 500px; max-height: 300px;">
         <p><strong>Description:</strong> <%= product.description %></p>

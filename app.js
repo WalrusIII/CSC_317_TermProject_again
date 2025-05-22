@@ -1,6 +1,12 @@
 const express = require('express');
 const app = express();
 
+// SQL / Database
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+const dbPath = path.join(__dirname, 'data', 'database.db');
+const db = new sqlite3.Database(dbPath);
+
 // Tell Express to use EJS
 app.set('view engine', 'ejs');
 // Set the directory for view templates
@@ -139,11 +145,7 @@ const productRoutes = require('./routes/products');
 app.use('/products', productRoutes);
 
 
-// SQL / Database
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-const dbPath = path.join(__dirname, 'data', 'database.db');
-const db = new sqlite3.Database(dbPath);
+
 
 
 

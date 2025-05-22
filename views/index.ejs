@@ -20,6 +20,14 @@
         <img src="images/shopping-cart.png">
         </a>
     </div>
+
+    <div class="userIcon">
+        <a href="/login">
+            <img src="images/user-icon.png" alt="User">
+        </a>
+    </div>
+
+
     <div class="container">
         <% Object.keys(products).forEach(key => { %>
             <div class="grid-item">
@@ -33,16 +41,5 @@
     </div>
 
 
-
-
-
-
-    <!--
-    <ul>
-        <% Object.keys(products).forEach(key => { %>
-            <li><a href="/product/<%= key %>"><%= products[key].name %></a></li>
-        <% }); %>
-    </ul>
-    -->
 </body>
 </html>
