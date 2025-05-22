@@ -22,10 +22,13 @@
         </a>
     </div>
 
-    <div class="userIcon">
-        <a href="/login">
+    <div class="userIcon" style="text-align: center;">
+        <a href="/<%= user ? 'profile' : 'login' %>">
             <img src="images/user-icon.png" alt="User">
         </a>
+        <% if (user) { %>
+            <p style="margin-top: 5px;"><%= user.name %></p>
+        <% } %>
     </div>
 
     <div class="title">

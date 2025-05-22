@@ -18,6 +18,12 @@ app.use(session({
     saveUninitialized: false
 }));
 
+// login status
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+});
+
 // Tell Express to use EJS
 app.set('view engine', 'ejs');
 // Set the directory for view templates
@@ -289,11 +295,7 @@ app.post('/login', (req, res) => {
   });
 });
 
-// login status
-app.use((req, res, next) => {
-  res.locals.user = req.session.user;
-  next();
-});
+
 
 // logout
 app.get('/logout', (req, res) => {
