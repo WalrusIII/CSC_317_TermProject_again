@@ -1,7 +1,7 @@
 /* Global Reset */
 body {
   background-color: lightgray;
-  font-family: sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
 }
 
@@ -50,22 +50,80 @@ body.dark-mode .button:hover {
   background-color: lightblue;
   overflow: hidden;
   z-index: 1000;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #navbar a {
-  float: left;
-  display: block;
+  margin-right: 20px;
   color: black;
-  text-align: center;
-  padding: 14px 20px;
   text-decoration: none;
+  font-weight: 600;
   transition: background-color 0.3s, color 0.3s;
 }
 
 #navbar a:hover {
   background-color: deepskyblue;
   color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
   transform: scale(1.05);
+}
+
+/* Login & Registration Form Enhancements */
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background: linear-gradient(to right, #f0f0f0, #ffffff);
+  min-height: 100vh;
+}
+
+.login-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px 30px;
+  margin: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.login-container:hover {
+  transform: scale(1.02);
+}
+
+.login-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+.login-container input:focus {
+  border-color: deepskyblue;
+  outline: none;
+}
+
+.login-container .toggle-password {
+  position: absolute;
+  right: 20px;
+  top: 44%;
+  cursor: pointer;
+  font-size: 14px;
+  color: #007bff;
+  user-select: none;
 }
 
 /* Search Form */
@@ -132,9 +190,10 @@ body.dark-mode .button:hover {
   margin-bottom: 30px;
   cursor: pointer;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   color: white;
   background-color: rgb(0, 162, 255);
+  font-weight: bold;
   transition: all 0.3s ease;
 }
 
@@ -221,5 +280,9 @@ body.dark-mode .button:hover {
   .search-form input {
     width: 80%;
     margin: 0 0 10px 0;
+  }
+
+  .login-container {
+    width: 90%;
   }
 }
