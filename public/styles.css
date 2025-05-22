@@ -65,11 +65,13 @@
 }
 
 .cartIcon{
-    justify-content: left;
+    position: absolute;
+    top: 10px;
+    right: 65px;
 }
 .cartIcon img {
-    width: 120px;
-    height: 60px;
+    width: 60px;
+    height: 30px;
     background-color: whitesmoke;
     border-radius: 40px;
 }
