@@ -1,4 +1,7 @@
 const express = require('express');
+const session = require('express-session');
+const bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
 const app = express();
 
 // SQL / Database
@@ -6,6 +9,14 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const dbPath = path.join(__dirname, 'data', 'database.db');
 const db = new sqlite3.Database(dbPath);
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    secret: 'some_secret_key',
+    resave: false,
+    saveUninitialized: false
+}));
 
 // Tell Express to use EJS
 app.set('view engine', 'ejs');
@@ -210,55 +221,80 @@ app.post('/remove-from-cart/:key', (req, res) => {
 
 
 
+// LOGIN / REGISTRATION
+const db2 = new sqlite3.Database('mydb.sqlite');
 
+db2.run(`CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    email TEXT UNIQUE,
+    password TEXT,
+    address TEXT,
+    city TEXT,
+    state TEXT,
+    zip TEXT
+)`);
 
+// registration
+app.post('/register', async (req, res) => {
+  const { name, email, address, city, state, zip, password } = req.body;
 
-
-/*
-document.getElementById('addToCart').addEventListener('click', async () => {
-  const productKey = document.getElementById('productKey').value;
-
-  const response = await fetch(`/add-to-cart/${productKey}`, {
-    method: 'POST'
-  });
-
-  if (response.ok) {
-    alert('Item added to cart!');
-  } else {
-    const errorText = await response.text();
-    alert(`Failed to add to cart: ${errorText}`);
-  }
-});
-*/
-
-
-
-/*
-app.post('/add-to-cart/:key', (req, res) => {
-  const productKey = req.params.key;
-
-  if (!products[productKey]) {
-    return res.status(404).send('Product not found');
+  if (!password) {
+    return res.status(400).send('Password is required.');
   }
 
-  db.get('SELECT quantity FROM cart WHERE productKey = ?', [productKey], (err, row) => {
-    if (err) return res.status(500).send('DB error');
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10); // ✅ salt rounds = 10
+    db2.run(
+      'INSERT INTO users (name, email, address, city, state, zip, password) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [name, email, address, city, state, zip, hashedPassword],
+      function (err) {
+        if (err) {
+          console.error(err.message);
+          return res.status(500).send('Database error.');
+        }
+        res.redirect('/login'); // or wherever
+      }
+    );
+  } catch (err) {
+    console.error('Hashing error:', err);
+    res.status(500).send('Server error.');
+  }
+});
 
-    if (row) {
-      db.run('UPDATE cart SET quantity = quantity + 1 WHERE productKey = ?', [productKey], (err) => {
-        if (err) return res.status(500).send('Update failed');
-        res.status(200).send('Updated');
-      });
-    } else {
-      db.run('INSERT INTO cart (productKey, quantity) VALUES (?, ?)', [productKey, 1], (err) => {
-        if (err) return res.status(500).send('Insert failed');
-        res.status(200).send('Inserted');
-      });
-    }
+// login
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  db2.get(`SELECT * FROM users WHERE email = ?`, [email], async (err, user) => {
+      if (err) return res.send('Login error: ' + err.message);
+      if (!user) return res.send('User not found');
+
+      const match = await bcrypt.compare(password, user.password);
+      if (match) {
+          req.session.user = user;
+          res.redirect('/');
+      } else {
+          res.send('Invalid password');
+      }
   });
 });
 
-*/
+// login status
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+});
+
+// logout
+app.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+      res.redirect('/');
+  });
+});
+
+
+
 
 
 
