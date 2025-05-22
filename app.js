@@ -129,6 +129,15 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
+// profile page
+app.get('/profile', (req, res) => {
+  const user = req.session.user;
+  if (!user) {
+    return res.redirect('/login');
+  }
+  res.render('profile', { user });
+});
+
 // About Us page
 app.get('/aboutus', (req, res) => {
   res.render('aboutUs');

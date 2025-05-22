@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="navbar">
+        <a href="/">Homepage</a>
+        <a href="/aboutUs">About Us</a>
+        <a href="/faq">F.A.Q.s</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <h1 class="title">Welcome, <%= user.name %>!</h1>
+
+    <div class="center-container">
+        <div class="login-container">
+            <h2>Your Information</h2>
+            <p><strong>Email:</strong> <%= user.email %></p>
+            <p><strong>Address:</strong> <%= user.address %></p>
+            <p><strong>City:</strong> <%= user.city %></p>
+            <p><strong>State:</strong> <%= user.state %></p>
+            <p><strong>Zip Code:</strong> <%= user.zip %></p>
+        </div>
+    </div>
+
+    <a href="/">Back to Home</a>
+</body>
+</html>
