@@ -10,7 +10,7 @@ const path = require('path');
 const dbPath = path.join(__dirname, 'data', 'database.db');
 const db = new sqlite3.Database(dbPath);
 
-
+// used for maintaining user login session
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: 'some_secret_key',
@@ -308,6 +308,26 @@ app.post('/place-order', (req, res) => {
     }
     res.redirect('/cart');
   });
+});
+
+
+// search
+app.get('/search', (req, res) => {
+  const query = req.query.q?.toLowerCase();
+
+  if (!query) {
+    return res.redirect('/');
+  }
+
+  const matchedProducts = {};
+
+  Object.keys(products).forEach((key) => {
+    if (products[key].name.toLowerCase().includes(query)) {
+      matchedProducts[key] = products[key];
+    }
+  });
+
+  res.render('searchResults', { products: matchedProducts, query });
 });
 
 

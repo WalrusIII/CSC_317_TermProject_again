@@ -3,18 +3,32 @@
 <head>
     <title>Homepage Template</title>
     <link rel="stylesheet" href="/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
+
+    
     <div id="navbar">
         <a href="/">Homepage</a>
         <a href="/aboutUs">About Us</a>
         <a href="/faq">F.A.Q.s</a>
         <a href="/login">Login/Registration</a>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Feeling Lucky?</a>
+        <!--<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Feeling Lucky?</a>-->
     </div>
 
-
     <h1 class="title">The Silver Surfer Snowboard Shop</h1>
+    
+    <div class="search-bar">
+        <form action="/search" method="GET">
+          <input type="text" name="q" placeholder="Search for products..." required>
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    
+
+
+    
     <div class = "cartIcon">
         <a href="/cart">
         <img src="images/shopping-cart.png">
@@ -46,9 +60,12 @@
         <% Object.keys(products).forEach(key => { %>
             <div class="grid-item">
                 <a href="/product/<%= key %>">
-                    <img src="/<%= products[key].image %>" alt="<%= products[key].name %>">
-                    <h2><%= products[key].name %></h2>
-                    <p>$<%= products[key].price %></p>
+                    <div class="product-info">
+                        <img src="/<%= products[key].image %>" alt="<%= products[key].name %>">
+                    
+                        <h2><%= products[key].name %></h2>
+                        <p>$<%= products[key].price %></p>
+                    </div>
                 </a>
             </div>
         <% }); %>
