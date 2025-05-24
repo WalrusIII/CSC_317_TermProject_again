@@ -8,7 +8,10 @@ const app = express();
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const dbPath = path.join(__dirname, 'data', 'database.db');
-const db = new sqlite3.Database(dbPath);
+//const db = new sqlite3.Database(dbPath);
+const db = new sqlite3.Database(path.join(__dirname, 'data', 'database.db'));
+
+//const db2 = new sqlite3.Database('mydb.sqlite');
 
 // used for maintaining user login session
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -233,13 +236,19 @@ app.post('/remove-from-cart/:key', (req, res) => {
     }
   });
 });
+// cart setup
+db.run(`CREATE TABLE IF NOT EXISTS cart (
+  productKey TEXT PRIMARY KEY,
+  quantity INTEGER,
+  price REAL
+)`);
 
 
 
 // LOGIN / REGISTRATION
-const db2 = new sqlite3.Database('mydb.sqlite');
-
-db2.run(`CREATE TABLE IF NOT EXISTS users (
+//const db2 = new sqlite3.Database('mydb.sqlite');
+// (formerly db2)
+db.run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     email TEXT UNIQUE,
@@ -260,7 +269,7 @@ app.post('/register', async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10); // ✅ salt rounds = 10
-    db2.run(
+    db.run( // (formerly db2)
       'INSERT INTO users (name, email, address, city, state, zip, password) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [name, email, address, city, state, zip, hashedPassword],
       function (err) {
@@ -277,11 +286,11 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// login
+// login (formerly db2)
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
-  db2.get(`SELECT * FROM users WHERE email = ?`, [email], async (err, user) => {
+  db.get(`SELECT * FROM users WHERE email = ?`, [email], async (err, user) => {
       if (err) return res.send('Login error: ' + err.message);
       if (!user) return res.send('User not found');
 
