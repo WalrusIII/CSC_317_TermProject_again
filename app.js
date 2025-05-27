@@ -7,10 +7,10 @@ const app = express();
 // SQL / Database
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
-const dbPath = path.join(__dirname, 'data', 'database.db');
+//const dbPath = path.join(__dirname, 'data', 'database.db');
 //const db = new sqlite3.Database(dbPath);
 const db = new sqlite3.Database(path.join(__dirname, 'data', 'database.db'));
-
+console.log('App initialized and starting...');
 //const db2 = new sqlite3.Database('mydb.sqlite');
 
 // used for maintaining user login session
@@ -26,6 +26,7 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user;
   next();
 });
+
 
 // Tell Express to use EJS
 app.set('view engine', 'ejs');
@@ -158,14 +159,38 @@ app.get('/faq', (req, res) => {
 });
 
 // cart page route
+/*
 app.get('/cart', (req, res) => {
+
   db.all('SELECT productKey, quantity, price FROM cart', (err, rows) => {
     if (err) return res.status(500).send('DB error');
 
     // You can also enrich cart items with full product info if needed
     res.render('shoppingCart', { cartItems: rows });
   });
+
+  console.log('Querying cart...');
+  db.all('SELECT productKey, quantity, price FROM cart', (err, rows) => {
+    console.log('Cart query callback triggered');
+    if (err) {
+      console.error('Cart query error:', err.message);
+      return res.status(500).send('DB error');
+    }
+
+    res.render('shoppingCart', { cartItems: rows });
+  });
+
 });
+*/
+app.get('/cart', (req, res) => {
+  db.all('SELECT productKey, quantity, price FROM cart', (err, rows) => {
+    if (err) return res.status(500).send('DB error');
+
+    // Add `user` with fallback (null or req.user if using auth)
+    res.render('shoppingCart', {cartItems: rows});
+  });
+});
+
 
 //const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
@@ -353,8 +378,9 @@ app.get('/logout', (req, res) => {
 
 
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 

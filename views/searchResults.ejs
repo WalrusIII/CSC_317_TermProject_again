@@ -13,6 +13,22 @@
         <a href="/login">Login/Registration</a>
     </div>
 
+    <div class = "cartIcon">
+        <a href="/cart">
+        <img src="images/shopping-cart.png">
+        </a>
+    </div>
+
+
+    <div class="userIcon" style="text-align: center;">
+        <a href="/<%= user ? 'profile' : 'login' %>">
+            <img src="images/user-icon.png" alt="User">
+        </a>
+        <% if (user) { %>
+            <p style="margin-top: 5px;"><%= user.name %></p>
+        <% } %>
+    </div>
+
     <h1 class="title">Search Results for "<%= query %>"</h1>
 
     <div class="container">
