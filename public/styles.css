@@ -254,6 +254,14 @@ input, label{
         text-align: center;
     }
 
+    /* make nav bar NOT sticky for mobile */
+    #navbar {
+        position: static;
+        top: 0;
+        overflow: hidden;
+        background-color: lightblue;
+    }
+
     #navbar a {
         float: none;
         display: block;
