@@ -159,34 +159,10 @@ app.get('/faq', (req, res) => {
 });
 
 // cart page route
-/*
-app.get('/cart', (req, res) => {
-
-  db.all('SELECT productKey, quantity, price FROM cart', (err, rows) => {
-    if (err) return res.status(500).send('DB error');
-
-    // You can also enrich cart items with full product info if needed
-    res.render('shoppingCart', { cartItems: rows });
-  });
-
-  console.log('Querying cart...');
-  db.all('SELECT productKey, quantity, price FROM cart', (err, rows) => {
-    console.log('Cart query callback triggered');
-    if (err) {
-      console.error('Cart query error:', err.message);
-      return res.status(500).send('DB error');
-    }
-
-    res.render('shoppingCart', { cartItems: rows });
-  });
-
-});
-*/
 app.get('/cart', (req, res) => {
   db.all('SELECT productKey, quantity, price FROM cart', (err, rows) => {
     if (err) return res.status(500).send('DB error');
 
-    // Add `user` with fallback (null or req.user if using auth)
     res.render('shoppingCart', {cartItems: rows});
   });
 });
@@ -203,7 +179,7 @@ app.use('/products', productRoutes);
 
 
 
-// attempt at add to cart button
+// 'add to cart' button
 app.post('/add-to-cart/:key', (req, res) => {
   const productKey = req.params.key;
   const product = products[productKey];
@@ -271,8 +247,7 @@ db.run(`CREATE TABLE IF NOT EXISTS cart (
 
 
 // LOGIN / REGISTRATION
-//const db2 = new sqlite3.Database('mydb.sqlite');
-// (formerly db2)
+
 db.run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
@@ -293,7 +268,7 @@ app.post('/register', async (req, res) => {
   }
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10); // ✅ salt rounds = 10
+    const hashedPassword = await bcrypt.hash(password, 10); //  salt rounds = 10
     db.run( // (formerly db2)
       'INSERT INTO users (name, email, address, city, state, zip, password) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [name, email, address, city, state, zip, hashedPassword],
@@ -311,7 +286,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// login (formerly db2)
+// login 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
